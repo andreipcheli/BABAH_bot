@@ -6,6 +6,9 @@ from dotenv import load_dotenv
 from telegram import ReplyKeyboardMarkup
 from telegram.ext import CommandHandler, Updater
 from logging.handlers import RotatingFileHandler
+import song.main
+import album.main
+from wake_up_message import wake_up_message
 
 load_dotenv()
 
@@ -28,23 +31,27 @@ def check_tokens():
             raise exceptions.TokenError(f'{token} does not exist')
 
 
-def say_hi(update, context):
+def wake_up(update, context):
     """Reaction to /start command"""
     chat = update.effective_chat
-    name = update.message.chat.first_name
 
     context.bot.send_message(
         chat_id=chat.id,
-        text='Привет, {}, я BABAH'.format(name),
+        text=wake_up_message,
     )
 
 
 def main():
+    check_tokens()
     updater = Updater(token=TELEGRAM_TOKEN)
-    updater.dispatcher.add_handler(CommandHandler('start', say_hi))
+    updater.dispatcher.add_handler(CommandHandler('start', wake_up))
+    updater.dispatcher.add_handler(CommandHandler('get_song', song.main.main))
+    updater.dispatcher.add_handler(CommandHandler('get_album', album.main.main))
 
     updater.start_polling()
     updater.idle()
+    
+
 
 
 if __name__ == '__main__':

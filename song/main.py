@@ -4,3 +4,10 @@ def get_song_name():
 
 def create_response():
     pass
+
+
+def main():
+    pass
+
+if __name__ == '__main__':
+    main()
