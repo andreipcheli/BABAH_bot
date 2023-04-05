@@ -28,23 +28,6 @@ def check_tokens():
             raise exceptions.TokenError(f'{token} does not exist')
 
 
-def my_timetable():
-    """Show the timetable for a current day of the week"""
-    day_timetable = {
-        'monday': '',
-        'tuesday': '',
-        'wednesday': '',
-        'thursday': '',
-        'friday': '',
-        'saturday': '',
-        'sunday': '',
-    }
-
-
-def what_to_do():
-    """Show an activity for a current time"""
-
-
 def say_hi(update, context):
     """Reaction to /start command"""
     chat = update.effective_chat
@@ -54,14 +37,6 @@ def say_hi(update, context):
         chat_id=chat.id,
         text='Привет, {}, я BABAH'.format(name),
     )
-
-
-def respond_with_Z_pic():
-    """Respond with Z picture for the unknown message"""
-
-
-def be_with_us():
-    """Join ЧВК «Редан» Амстердам community"""
 
 
 def main():
